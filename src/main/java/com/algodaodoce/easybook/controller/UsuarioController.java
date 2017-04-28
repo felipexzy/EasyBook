@@ -16,7 +16,7 @@ import com.algodaodoce.easybook.service.UsuarioService;
 @RequestMapping("/usuario")
 public class UsuarioController {
 
-@Autowired UsuarioService usuarioService;
+	@Autowired UsuarioService usuarioService;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String livro(Model model){
@@ -31,7 +31,7 @@ public class UsuarioController {
 		return new ResponseEntity<Usuario>(this.usuarioService.salvar(usuario),HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{id}",method = RequestMethod.GET)
 	public ResponseEntity<Usuario> buscar(@PathVariable Long id){
 		
 		return new ResponseEntity<Usuario>(this.usuarioService.buscar(id),HttpStatus.OK);

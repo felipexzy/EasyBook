@@ -31,7 +31,7 @@ public class LivroController {
 		return new ResponseEntity<Livro>(this.livroService.salvar(livro),HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{id}",method = RequestMethod.GET)
 	public ResponseEntity<Livro> buscar(@PathVariable Long id){
 		
 		return new ResponseEntity<Livro>(this.livroService.buscar(id),HttpStatus.OK);

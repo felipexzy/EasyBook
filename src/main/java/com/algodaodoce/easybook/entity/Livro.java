@@ -9,8 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
-public class Livro implements Serializable{
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class Livro implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -24,7 +27,7 @@ public class Livro implements Serializable{
 	
 	private String autor;
 	
-	private String descrição;
+	private String descricao;
 	
 	private String isbn;
 	
@@ -71,12 +74,12 @@ public class Livro implements Serializable{
 		this.autor = autor;
 	}
 
-	public String getDescrição() {
-		return descrição;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setDescrição(String descrição) {
-		this.descrição = descrição;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	public String getIsbn() {
@@ -103,15 +106,65 @@ public class Livro implements Serializable{
 		this.editora = editora;
 	}
 
-	public Livro(Long id, String nome, String autor, String descrição, String isbn, byte[] imagem, String editora, Usuario usuario) {
+	public Livro(Long id, String nome, String autor, String descricao, String isbn, byte[] imagem, String editora, Usuario usuario) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.autor = autor;
-		this.descrição = descrição;
+		this.descricao = descricao;
 		this.isbn = isbn;
 		this.imagem = imagem;
 		this.editora = editora;
 		this.usuario = usuario;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((autor == null) ? 0 : autor.hashCode());
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + ((editora == null) ? 0 : editora.hashCode());
+		result = prime * result + ((isbn == null) ? 0 : isbn.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Livro other = (Livro) obj;
+		if (autor == null) {
+			if (other.autor != null)
+				return false;
+		} else if (!autor.equals(other.autor))
+			return false;
+		if (descricao == null) {
+			if (other.descricao != null)
+				return false;
+		} else if (!descricao.equals(other.descricao))
+			return false;
+		if (editora == null) {
+			if (other.editora != null)
+				return false;
+		} else if (!editora.equals(other.editora))
+			return false;
+		if (isbn == null) {
+			if (other.isbn != null)
+				return false;
+		} else if (!isbn.equals(other.isbn))
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		return true;
+	}
+	
 }
