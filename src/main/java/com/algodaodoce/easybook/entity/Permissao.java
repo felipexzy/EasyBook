@@ -1,33 +1,43 @@
 package com.algodaodoce.easybook.entity;
 
-import java.io.Serializable;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Book implements Serializable{
-
-	private static final long serialVersionUID = 1L;
+public class Permissao {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(nullable = false)
 	private Long id;
 	
-	@Column(nullable = false)
 	private String nome;
 	
-	public Book() {
+	public Permissao() {
+		// TODO Auto-generated constructor stub
 	}
 
-	public Book(Long id, String nomeSobre) {
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public Permissao(Long id, String nome) {
 		super();
 		this.id = id;
-		this.nome = nomeSobre;
+		this.nome = nome;
 	}
 
 	@Override
@@ -47,7 +57,7 @@ public class Book implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Book other = (Book) obj;
+		Permissao other = (Permissao) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -60,23 +70,4 @@ public class Book implements Serializable{
 			return false;
 		return true;
 	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
-	
-	
 }
