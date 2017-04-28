@@ -8,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class Usuario {
@@ -30,9 +29,6 @@ public class Usuario {
 	
 	@Column(nullable = false)
 	private String senha;
-	
-	@ManyToOne
-	private Livro livro;
 	
 	@ManyToMany
 	@Column(nullable = false)
@@ -90,14 +86,6 @@ public class Usuario {
 		this.senha = senha;
 	}
 
-	public Livro getLivro() {
-		return livro;
-	}
-
-	public void setLivro(Livro livro) {
-		this.livro = livro;
-	}
-
 	public List<Permissao> getPermissoes() {
 		return permissoes;
 	}
@@ -106,7 +94,7 @@ public class Usuario {
 		this.permissoes = permissoes;
 	}
 
-	public Usuario(Long id, String nome, String sobreNome, String telefone, String email, String senha, Livro livro,
+	public Usuario(Long id, String nome, String sobreNome, String telefone, String email, String senha,
 			List<Permissao> permissoes) {
 		super();
 		this.id = id;
@@ -115,7 +103,6 @@ public class Usuario {
 		this.telefone = telefone;
 		this.email = email;
 		this.senha = senha;
-		this.livro = livro;
 		this.permissoes = permissoes;
 	}
 

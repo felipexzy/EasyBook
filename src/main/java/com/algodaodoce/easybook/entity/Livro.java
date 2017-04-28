@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Livro implements Serializable{
@@ -27,12 +28,23 @@ public class Livro implements Serializable{
 	
 	private String isbn;
 	
+	private String editora;
+	
 	@Column(columnDefinition = "blob")
 	private byte[] imagem;
 	
-	private String editora;
+	@ManyToOne
+	private Usuario usuario;
 	
 	public Livro() {
+	}
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public Long getId() {
@@ -91,7 +103,7 @@ public class Livro implements Serializable{
 		this.editora = editora;
 	}
 
-	public Livro(Long id, String nome, String autor, String descrição, String isbn, byte[] imagem, String editora) {
+	public Livro(Long id, String nome, String autor, String descrição, String isbn, byte[] imagem, String editora, Usuario usuario) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -100,5 +112,6 @@ public class Livro implements Serializable{
 		this.isbn = isbn;
 		this.imagem = imagem;
 		this.editora = editora;
+		this.usuario = usuario;
 	}
 }
