@@ -2,6 +2,7 @@ package com.algodaodoce.easybook.entity;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,20 +17,25 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	@Column(nullable = false)
 	private String nome;
 	
 	private String sobreNome;
 	
+	@Column(nullable = false)
 	private String telefone;
 	
-	private String login;
+	@Column(unique = true, nullable = false)
+	private String email;
 	
+	@Column(nullable = false)
 	private String senha;
 	
 	@ManyToOne
 	private Livro livro;
 	
 	@ManyToMany
+	@Column(nullable = false)
 	private List<Permissao> permissoes;
 	
 	public Usuario() {
@@ -68,12 +74,12 @@ public class Usuario {
 		this.telefone = telefone;
 	}
 
-	public String getLogin() {
-		return login;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
+	public void setLogin(String email) {
+		this.email = email;
 	}
 
 	public String getSenha() {
@@ -100,14 +106,14 @@ public class Usuario {
 		this.permissoes = permissoes;
 	}
 
-	public Usuario(Long id, String nome, String sobreNome, String telefone, String login, String senha, Livro livro,
+	public Usuario(Long id, String nome, String sobreNome, String telefone, String email, String senha, Livro livro,
 			List<Permissao> permissoes) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.sobreNome = sobreNome;
 		this.telefone = telefone;
-		this.login = login;
+		this.email = email;
 		this.senha = senha;
 		this.livro = livro;
 		this.permissoes = permissoes;
@@ -117,7 +123,7 @@ public class Usuario {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((login == null) ? 0 : login.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
 		result = prime * result + ((telefone == null) ? 0 : telefone.hashCode());
@@ -133,10 +139,10 @@ public class Usuario {
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
-		if (login == null) {
-			if (other.login != null)
+		if (email == null) {
+			if (other.email != null)
 				return false;
-		} else if (!login.equals(other.login))
+		} else if (!email.equals(other.email))
 			return false;
 		if (nome == null) {
 			if (other.nome != null)
