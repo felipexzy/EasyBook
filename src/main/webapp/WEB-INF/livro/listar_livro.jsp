@@ -23,10 +23,10 @@
 		</button>
 		<form id="form-livro" action="" method="post">
 			<input type="hidden" id="id" name="id"/>
-			
+			<input type="hidden" id="imagem" name="imagem"/>
 			<div>
-				<label for="imagem">Imagem: </label>
-				<input type="file" id="imagem" name="imagem" onchange="imagemBase()" class="form-control" accept="image/*"/>
+				<label for="imagemBase">Imagem: </label>
+				<input type="file" id="imagemBase" name="imagemBase" class="form-control" accept="image/*"/>
 					<img  src = "data: image / *; base64,"  id="id_imagem" height="50px" width="50px"/>
 			</div>
 			
@@ -50,7 +50,7 @@
 				<label for="nome">Descrição: </label>
 				<input type="text" id="descricao" name="descricao" class="form-control"/>
 			</div>
-				
+		
 			<input type="button" id="btn-salvar" value="Salvar" class="btn btn-primary"/>
 			<input type="button" id="btn-cancelar" value="Cancelar" class="btn btn-default"/>
 		</form>
@@ -62,6 +62,7 @@
 					<th>Autor</th>
 					<th>Editora</th>
 					<th>Descrição</th>
+					<th>Imagem</th>
 					<th>Editar</th>
 					<th>Deletar</th>
 				</tr>
@@ -74,7 +75,8 @@
 						<td>${livro.autor}</td>
 						<td>${livro.editora}</td>
 						<td>${livro.descricao}</td>
-						<td><input type="button" onclick="editar(this)" value="Editar" class="btn btn-warning btn-editar"/></td>
+						<td><img  src = "data: image / *; base64,${livro.imagem64}" height="50px" width="50px"/></td>
+						<td><input type="button" onclick="editar(this)" id="btn-editar" value="Editar" class="btn btn-warning"/></td>
 						<td><input type="button" onclick="remover(this)" id="btn-deletar" value="Deletar" class="btn btn-danger"/></td>
 					</tr>
 				</c:forEach>

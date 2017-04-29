@@ -1,5 +1,7 @@
 $(document).ready(function(){
 	
+	$("#imagemBase").on("change", readFile);
+	
 	$("#form-livro").hide();
 	
 	$("#btn-cancelar").click(function(){
@@ -12,6 +14,10 @@ $(document).ready(function(){
 	
 	$('#btn-salvar').on('click', function(){
 		var url = 'livro';
+		//var imagemBase64 = $('#imagem').val();
+		//var clip = imagemBase64.split(",");
+		//console.log(imagemBase64)
+		//$('#imagem').val(clip[1]);
 		var dadosLivro = $('#form-livro').serialize();
 		
 		if($('#id').val()){
@@ -62,6 +68,23 @@ $(document).ready(function(){
 
 });
 
+
+function readFile() {
+	  
+	  if (this.files && this.files[0]) {
+	    
+	    var FR = new FileReader();
+	    
+	    FR.addEventListener("load", function(e) {
+	      document.getElementById("id_imagem").src = e.target.result;
+	      //var imagemConvertida = e.target.result;
+	     var a =  $('#imagem').val(e.target.result);
+	    }); 
+	    
+	    FR.readAsDataURL(this.files[0]);
+	  }  
+}
+
 function limpar(){
 	$('#id').val('');
 	$('#nome').val('');
@@ -89,18 +112,7 @@ function editar(evento){
 	});
 }
 
-function imagemBase(){
-	console.log($("#imagem")[0].files)
-    var reader = new window.FileReader();
-   	 reader.readAsDataURL($("#imagem")[0].files); 
-   	 reader.onloadend = function() {
-   	        base64data = reader.result;
-   	                var image = base64data;
-   	                var clip = image.split(",");
-   	                var base = clip[1];
-   	                console.log(base)
-   	  }
-    }
+
 
 function remover(evento){
 	var id = $(evento).parents('tr').data('id');

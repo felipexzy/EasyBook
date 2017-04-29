@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -33,6 +34,9 @@ public class Livro implements Serializable {
 	
 	private String editora;
 	
+	@Transient
+	private String imagem64;
+	
 	@Column(columnDefinition = "blob")
 	private byte[] imagem;
 	
@@ -40,6 +44,14 @@ public class Livro implements Serializable {
 	private Usuario usuario;
 	
 	public Livro() {
+	}
+	
+	public String getImagem64() {
+		return imagem64;
+	}
+	
+	public void setImagem64(String imagem64) {
+		this.imagem64 = imagem64;
 	}
 	
 	public Usuario getUsuario() {

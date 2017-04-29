@@ -26,7 +26,7 @@ public class LivroController {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Livro> salvar(Livro livro){
+	public ResponseEntity<Livro> salvar(Livro livro) {
 		
 		return new ResponseEntity<Livro>(this.livroService.salvar(livro),HttpStatus.OK);
 	}
