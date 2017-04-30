@@ -8,19 +8,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Livro implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(nullable = false)
 	private Long id;
 	
 	@Column(nullable = false)
@@ -33,10 +28,7 @@ public class Livro implements Serializable {
 	private String isbn;
 	
 	private String editora;
-	
-	@Transient
-	private String imagem64;
-	
+
 	@Column(columnDefinition = "blob")
 	private byte[] imagem;
 	
@@ -44,14 +36,6 @@ public class Livro implements Serializable {
 	private Usuario usuario;
 	
 	public Livro() {
-	}
-	
-	public String getImagem64() {
-		return imagem64;
-	}
-	
-	public void setImagem64(String imagem64) {
-		this.imagem64 = imagem64;
 	}
 	
 	public Usuario getUsuario() {

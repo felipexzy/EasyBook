@@ -1,9 +1,7 @@
 package com.algodaodoce.easybook.service;
 
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,17 +26,6 @@ public class LivroService {
 	public List<Livro> listar(){
 		
 		List<Livro> livros = livroRepository.findAll();
-	
-		for(Livro livro : livros){
-			byte[] base64 = Base64.encodeBase64(livro.getImagem());
-			String valor = null;
-			try {
-				valor = new String(base64, "UTF-8");
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
-			livro.setImagem64(valor);
-		}
 		
 		return livros;
 	}
