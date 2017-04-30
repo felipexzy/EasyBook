@@ -4,7 +4,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html ng-app="teste">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,7 +15,7 @@
 
 </style>
 </head>
-<body>
+<body ng-controller="testeController">
 
 	<section class="container">
 		<button type="button" id="btn-cadastrar" class="btn btn-primary">
@@ -75,8 +75,8 @@
 						<td>${livro.autor}</td>
 						<td>${livro.editora}</td>
 						<td>${livro.descricao}</td>
-						<td><img  src = "data: image / *; base64,${livro.imagem64}" height="50px" width="50px"/></td>
-						<td><input type="button" onclick="editar(this)" id="btn-editar" value="Editar" class="btn btn-warning"/></td>
+						<td><img  src = "data: image / *; base64,${livro.imagem}" height="50px" width="50px"/></td>
+						<td><input type="button" ng-click="editar(${livro.id})" id="btn-editar" value="Editar" class="btn btn-warning"/></td>
 						<td><input type="button" onclick="remover(this)" id="btn-deletar" value="Deletar" class="btn btn-danger"/></td>
 					</tr>
 				</c:forEach>
@@ -84,6 +84,8 @@
 		</table>
 	</section>
 	
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	<script type="text/javascript" src="static/js/teste.js"></script>
 	<script type="text/javascript" src="static/js/jquery-2.2.4.min.js"></script>
 	<script type="text/javascript" src="static/bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="static/js/jquery.bootstrap-growl.min.js"></script>
