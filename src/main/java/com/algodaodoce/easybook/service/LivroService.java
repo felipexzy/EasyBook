@@ -13,51 +13,52 @@ import com.algodaodoce.easybook.security.CurrentUser;
 @Service
 public class LivroService {
 
-	@Autowired LivroRepository livroRepository;
-	
+	@Autowired
+	LivroRepository livroRepository;
+
 	@Autowired
 	UsuarioService ususarioService;
-	
-	
+
 	@Autowired
 	private CurrentUser currentUser;
-	
-	public Livro salvar(Livro livro){
+
+	public Livro salvar(Livro livro) {
 		Usuario usuario = this.ususarioService.findByEmail(currentUser.getActiveUser().getEmail());
-		
+
 		livro.setUsuario(usuario);
-		
+
 		return this.livroRepository.save(livro);
 	}
-	
-	public Livro buscar(Long id){
-		
+
+	public Livro buscar(Long id) {
+
 		return this.livroRepository.getOne(id);
 	}
-	
-	public List<Livro> listar(){
-		
+
+	public List<Livro> listar() {
+
 		List<Livro> livros = livroRepository.findAll();
-		
+
 		return livros;
 	}
-	
-	public List<Livro> listarPorLogado(){
-		
+
+	public List<Livro> listarPorLogado() {
+
 		Usuario usuario = this.ususarioService.findByEmail(currentUser.getActiveUser().getEmail());
-		
+
 		List<Livro> livros = this.livroRepository.findAllByUsuario(usuario);
-		
+
 		return livros;
 	}
-	
-	public List<Livro> listarPorNome(String nome){
+
+	public List<Livro> listarPorNome(String nome) {
 		return this.livroRepository.listarPorNome(nome);
 	}
-	
-	public Livro deletar(Livro l){
+
+	public Livro deletar(Livro l) {
 		Livro livro = this.buscar(l.getId());
-		if(livro != null) this.livroRepository.delete(livro);
+		if (livro != null)
+			this.livroRepository.delete(livro);
 		return livro;
 	}
 }
