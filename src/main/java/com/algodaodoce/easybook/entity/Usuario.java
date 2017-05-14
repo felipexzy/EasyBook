@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Usuario implements Serializable{
@@ -22,8 +23,6 @@ public class Usuario implements Serializable{
 	@Column(nullable = false)
 	private String nome;
 	
-	private String sobreNome;
-	
 	@Column(nullable = false)
 	private String telefone;
 	
@@ -33,14 +32,24 @@ public class Usuario implements Serializable{
 	@Column(nullable = false)
 	private String senha;
 	
+	private String endereco;
+	
 	@ManyToMany
 	@Column(nullable = false)
 	private List<Permissao> permissoes;
 	
+	@OneToMany(mappedBy = "usuario")
+	private List<Livro> livros;
+	
 	public Usuario() {
 	
 	}
-
+	public List<Livro> getLivros() {
+		return livros;
+	}
+	public void setLivros(List<Livro> livros) {
+		this.livros = livros;
+	}
 	public Long getId() {
 		return id;
 	}
@@ -52,17 +61,15 @@ public class Usuario implements Serializable{
 	public String getNome() {
 		return nome;
 	}
+	public String getEndereco() {
+		return endereco;
+	}
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public String getSobreNome() {
-		return sobreNome;
-	}
-
-	public void setSobreNome(String sobreNome) {
-		this.sobreNome = sobreNome;
 	}
 
 	public String getTelefone() {
@@ -75,6 +82,9 @@ public class Usuario implements Serializable{
 
 	public String getEmail() {
 		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public void setLogin(String email) {
@@ -97,12 +107,11 @@ public class Usuario implements Serializable{
 		this.permissoes = permissoes;
 	}
 
-	public Usuario(Long id, String nome, String sobreNome, String telefone, String email, String senha,
+	public Usuario(Long id, String nome, String telefone, String email, String senha,
 			List<Permissao> permissoes) {
 		super();
 		this.id = id;
 		this.nome = nome;
-		this.sobreNome = sobreNome;
 		this.telefone = telefone;
 		this.email = email;
 		this.senha = senha;

@@ -9,7 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Livro implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -28,7 +31,9 @@ public class Livro implements Serializable {
 	private String isbn;
 	
 	private String editora;
-
+	
+	private Double preco;
+	
 	@Column(columnDefinition = "blob")
 	private byte[] imagem;
 	
@@ -37,7 +42,12 @@ public class Livro implements Serializable {
 	
 	public Livro() {
 	}
-	
+	public Double getPreco() {
+		return preco;
+	}
+	public void setPreco(Double preco) {
+		this.preco = preco;
+	}
 	public Usuario getUsuario() {
 		return usuario;
 	}

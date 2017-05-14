@@ -30,6 +30,10 @@ public class LivroService {
 		return livros;
 	}
 	
+	public List<Livro> listarPorNome(String nome){
+		return this.livroRepository.listarPorNome(nome);
+	}
+	
 	public Livro deletar(Long id){
 		Livro livro = this.buscar(id);
 		if(livro != null) this.livroRepository.delete(livro);

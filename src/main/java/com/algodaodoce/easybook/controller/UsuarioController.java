@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.algodaodoce.easybook.entity.Usuario;
 import com.algodaodoce.easybook.service.UsuarioService;
+import com.algodaodoce.easybook.utils.Map;
+import com.algodaodoce.easybook.utils.Path;
 
 @Controller
-@RequestMapping("/usuario")
-public class UsuarioController {
+@RequestMapping(path=Path.USUARIO_PATH)
+public class UsuarioController implements Map{
 
 	@Autowired UsuarioService usuarioService;
 	
