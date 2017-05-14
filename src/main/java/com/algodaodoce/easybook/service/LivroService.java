@@ -6,14 +6,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.algodaodoce.easybook.entity.Livro;
+import com.algodaodoce.easybook.entity.Usuario;
 import com.algodaodoce.easybook.repository.LivroRepository;
+import com.algodaodoce.easybook.security.CurrentUser;
 
 @Service
 public class LivroService {
 
 	@Autowired LivroRepository livroRepository;
 	
+	@Autowired
+	UsuarioService ususarioService;
+	
+	
+	@Autowired
+	private CurrentUser currentUser;
+	
 	public Livro salvar(Livro livro){
+		Usuario usuario = this.ususarioService.findByEmail(currentUser.getActiveUser().getEmail());
+		
+		livro.setUsuario(usuario);
 		
 		return this.livroRepository.save(livro);
 	}
@@ -26,6 +38,15 @@ public class LivroService {
 	public List<Livro> listar(){
 		
 		List<Livro> livros = livroRepository.findAll();
+		
+		return livros;
+	}
+	
+	public List<Livro> listarPorLogado(){
+		
+		Usuario usuario = this.ususarioService.findByEmail(currentUser.getActiveUser().getEmail());
+		
+		List<Livro> livros = this.livroRepository.findAllByUsuario(usuario);
 		
 		return livros;
 	}

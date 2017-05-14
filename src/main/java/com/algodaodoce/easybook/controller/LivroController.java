@@ -25,7 +25,7 @@ public class LivroController implements Map{
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<Livro>> livro(){
 		
-		return new ResponseEntity<List<Livro>>(livroService.listar(),HttpStatus.OK);
+		return new ResponseEntity<List<Livro>>(livroService.listarPorLogado(),HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)

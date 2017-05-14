@@ -30,4 +30,9 @@ public class UsuarioService {
 		if(usuario != null) this.usuarioRepository.delete(usuario);
 		return usuario;
 	}
+
+	public Usuario findByEmail(String email) {
+		
+		return this.usuarioRepository.findByEmail(email);
+	}
 }
