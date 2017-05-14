@@ -3,6 +3,8 @@ package com.algodaodoce.easybook.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -29,5 +31,11 @@ public class HomeController implements Map{
 	@RequestMapping(value = "/buscar/{nome}")
 	public ResponseEntity<List<Livro>> buscar(@PathVariable String nome) {
 		return new ResponseEntity<>(livroServices.listarPorNome(nome), HttpStatus.OK);
+	}
+	
+	@RequestMapping(method = RequestMethod.GET,value = "/list")
+	public ResponseEntity<Page<Livro>> getPagination(Pageable pageable) {
+
+		return new ResponseEntity<Page<Livro>>(livroServices.getBookPagination(pageable), HttpStatus.OK);
 	}
 }

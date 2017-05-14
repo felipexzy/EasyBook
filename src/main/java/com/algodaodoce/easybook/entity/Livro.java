@@ -26,7 +26,7 @@ public class Livro implements Serializable {
 	private String nome;
 	
 	private String autor;
-	
+	@Column(length=350)
 	private String descricao;
 	
 	private String isbn;

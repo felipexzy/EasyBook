@@ -3,6 +3,8 @@ package com.algodaodoce.easybook.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.algodaodoce.easybook.entity.Livro;
@@ -60,5 +62,10 @@ public class LivroService {
 		if (livro != null)
 			this.livroRepository.delete(livro);
 		return livro;
+	}
+
+	public Page<Livro> getBookPagination(Pageable pageable) {
+		// TODO Auto-generated method stub
+		return this.livroRepository.findAll(pageable);
 	}
 }
