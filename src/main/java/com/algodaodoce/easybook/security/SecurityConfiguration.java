@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -29,7 +31,7 @@ import org.springframework.web.util.WebUtils;
 import com.algodaodoce.easybook.utils.Path;
 
 @EnableWebSecurity
-
+@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 
 	public static final String AUTH_USER = "ROLE_USER";
@@ -47,8 +49,8 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
-		//auth.userDetailsService(this.userService).passwordEncoder(this.passwordEncoder);
-		auth.inMemoryAuthentication().withUser("admin@admin.com").password("admin").roles("ADMIN");
+		auth.userDetailsService(this.userService).passwordEncoder(this.passwordEncoder);
+		//auth.inMemoryAuthentication().withUser("admin@admin.com").password("admin").roles("ADMIN");
 	}
 
 	@Override
@@ -59,10 +61,10 @@ public class SecurityConfiguration  extends WebSecurityConfigurerAdapter {
 		// Public (permit all).
 		//.antMatchers(Path.PUBLIC_ROOT_PATH + Path.HOME_PATH).permitAll()
 		// Book Authorities.
-		.antMatchers(HttpMethod.GET, Path.LIVRO_PATH).hasAnyAuthority(AUTH_ADMIN)
-		.antMatchers(HttpMethod.POST, Path.LIVRO_PATH).hasAnyAuthority(AUTH_ADMIN)
-		.antMatchers(HttpMethod.PUT, Path.LIVRO_PATH).hasAnyAuthority(AUTH_ADMIN)
-		.antMatchers(HttpMethod.DELETE, Path.LIVRO_PATH).hasAnyAuthority (AUTH_ADMIN)
+		.antMatchers(HttpMethod.GET, Path.LIVRO_PATH).hasAnyAuthority(AUTH_ADMIN, AUTH_USER)
+		.antMatchers(HttpMethod.POST, Path.LIVRO_PATH).hasAnyAuthority(AUTH_ADMIN, AUTH_USER)
+		.antMatchers(HttpMethod.PUT, Path.LIVRO_PATH).hasAnyAuthority(AUTH_ADMIN, AUTH_USER)
+		.antMatchers(HttpMethod.DELETE, Path.LIVRO_PATH).hasAnyAuthority (AUTH_ADMIN, AUTH_USER)
 		// User Authorities.
 		.antMatchers(HttpMethod.GET, Path.USUARIO_PATH).hasAnyAuthority(AUTH_ADMIN, AUTH_USER)
 		.antMatchers(HttpMethod.POST, Path.USUARIO_PATH).hasAnyAuthority(AUTH_ADMIN, AUTH_USER)

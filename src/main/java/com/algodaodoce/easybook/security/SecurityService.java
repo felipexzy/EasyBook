@@ -14,8 +14,8 @@ import com.algodaodoce.easybook.utils.Path;
 public class SecurityService implements Map {
 
 	@RequestMapping(method = { RequestMethod.GET })
-	public Principal user(Principal user) {
-		return user;
+	public Principal user(Principal usuario) {
+		return usuario;
 	}
 
 }
