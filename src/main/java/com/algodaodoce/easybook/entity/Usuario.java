@@ -36,7 +36,6 @@ public class Usuario implements Serializable{
 	private String endereco;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
-	@Column(nullable = false)
 	private List<Permissao> permissoes;
 	
 	@OneToMany(mappedBy = "usuario")

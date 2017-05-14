@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.algodaodoce.easybook.entity.Permissao;
@@ -18,6 +18,9 @@ public class CadastroService {
 	@Autowired UsuarioRepository usuarioRepository;
 	@Autowired PermissaoRepository permissaoRepository;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	public Usuario salvar(Usuario usuario){
 		
 		List<Permissao> permissoes = new ArrayList<>();
@@ -25,9 +28,7 @@ public class CadastroService {
 		
 		usuario.setPermissoes(permissoes);
 		
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		
-		usuario.setSenha(encoder.encode(usuario.getSenha()));
+		usuario.setSenha(this.passwordEncoder.encode(usuario.getSenha()));
 		
 		return this.usuarioRepository.save(usuario);
 	}
