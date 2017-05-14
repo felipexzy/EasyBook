@@ -39,9 +39,9 @@ public class LivroController implements Map{
 		
 		return new ResponseEntity<Livro>(this.livroService.buscar(id),HttpStatus.OK);
 	}
-	@RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
-	public ResponseEntity<Livro> deletar(@PathVariable Long id){
+	@RequestMapping(method = RequestMethod.DELETE)
+	public ResponseEntity<Livro> deletar(@RequestBody Livro livro){
 		
-		return new ResponseEntity<Livro>(this.livroService.deletar(id),HttpStatus.OK);
+		return new ResponseEntity<Livro>(this.livroService.deletar(livro),HttpStatus.OK);
 	}
 }

@@ -34,8 +34,8 @@ public class LivroService {
 		return this.livroRepository.listarPorNome(nome);
 	}
 	
-	public Livro deletar(Long id){
-		Livro livro = this.buscar(id);
+	public Livro deletar(Livro l){
+		Livro livro = this.buscar(l.getId());
 		if(livro != null) this.livroRepository.delete(livro);
 		return livro;
 	}
